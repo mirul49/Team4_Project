@@ -2,7 +2,7 @@
 
 import random
 import time
-from auth import is_logged_in, get_current_user
+from auth import is_logged_in, get_current_user, update_high_score
 
 def start_game(game_settings):
 
@@ -51,7 +51,7 @@ def start_game(game_settings):
 
         typed_word = input("Type here: ")
 
-        if typed_word == word:
+        if typed_word.lower() == word.lower():
             score += 1
             print("Correct!")
         else:
@@ -59,5 +59,10 @@ def start_game(game_settings):
 
     print("\n===== Game Over =====")
     print("Final Score:", score)
+
+    # Update the player's high score
+    update_high_score(username, score)
+
+    print("High score has been updated.")
 
     return score
