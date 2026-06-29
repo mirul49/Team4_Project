@@ -4,6 +4,9 @@ from settings import show_difficulty_options, choose_difficulty, get_settings
 # Import functions from leaderboard.py
 from leaderboard import save_score, show_leaderboard
 
+# Import functions from game.py
+from game import start_game
+
 
 # Ask player for username
 username = input("Enter your username: ")
@@ -37,9 +40,8 @@ print("Word List:", game_settings["word_list"])
 print("\nStarting TypeRush...")
 
 
-# Temporary score input for testing
-# Later, Cheng Rou can replace this with the real score from game.py
-score = int(input("Enter your score: "))
+# Start the TypeRush game
+score = start_game(game_settings)
 
 
 # Save username and score into data/scores.json
