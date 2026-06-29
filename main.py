@@ -1,3 +1,7 @@
+import sys
+# Import the auth module
+import auth
+
 # Import functions from settings.py
 from settings import show_difficulty_options, choose_difficulty, get_settings
 
@@ -7,6 +11,40 @@ from leaderboard import save_score, show_leaderboard
 # Import functions from game.py
 from game import start_game
 
+print("="*45)
+print("          WELCOME TO TYPERUSH          ")
+print("="*45)
+
+while True:
+    print("\n1. Login")
+    print("2. Register")
+    print("3. Exit")
+    auth_choice = input("Choose an option: ").strip()
+
+    if auth_choice == "1":
+        uname = input("Enter username: ")
+        pwd = input("Enter password: ")
+        success, message = auth.login(uname, pwd)
+        print(f" {'✓' if success else '✗'} {message}")
+        if success:
+            break  # Break out of the auth loop to start the game
+
+    elif auth_choice == "2":
+        uname = input("Choose a username: ")
+        pwd = input("Choose a password: ")
+        success, message = auth.register(uname, pwd)
+        print(f" {'✓' if success else '✗'} {message}")
+        if success:
+            print("Please log in with your new account.")
+
+    elif auth_choice == "3":
+        print("Goodbye!")
+        sys.exit()
+    else:
+        print("Invalid option. Please choose 1, 2, or 3.")
+
+# Retrieve the verified username from the active session
+username = auth.get_current_user()
 
 # Ask player for username
 username = input("Enter your username: ")
