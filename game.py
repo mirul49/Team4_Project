@@ -2,9 +2,17 @@
 
 import random
 import time
+from auth import is_logged_in, get_current_user
 
 def start_game(game_settings):
-  
+
+    # Check if the player is logged in
+    if not is_logged_in():
+        print("Please login before playing TypeRush.")
+        return 0
+
+    username = get_current_user()
+
     # Get game settings
     time_limit = game_settings["time_limit"]
     word_list = game_settings["word_list"]
@@ -13,6 +21,7 @@ def start_game(game_settings):
     score = 0
 
     print("\n===== TypeRush =====")
+    print("Player:", username)
     print("Difficulty:", difficulty)
     print("Time Limit:", time_limit, "seconds")
     print("Type the words exactly as shown.")
