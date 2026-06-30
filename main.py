@@ -46,9 +46,6 @@ while True:
 # Retrieve the verified username from the active session
 username = auth.get_current_user()
 
-# Ask player for username
-username = input("Enter your username: ")
-
 
 # Show difficulty menu
 show_difficulty_options()
