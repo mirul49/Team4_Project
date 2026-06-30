@@ -25,22 +25,35 @@
     <h2>Leaderboard</h2>
     <p>Top players are ranked from highest score to lowest score.</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Username</th>
-          <th>Score</th>
-        </tr>
-      </thead>
+    <!-- This section shows only when user is NOT signed in -->
+    <section id="notSignedInBox">
+      <h3>You are not signed in</h3>
+      <p>Please sign in to see your leaderboard rankings.</p>
+      <button onclick="goToLogin()">Sign in to see leaderboard</button>
+    </section>
 
-      <tbody id="leaderboardTable">
-        <!-- Scores will appear here using JavaScript -->
-      </tbody>
-    </table>
+    <!-- This section shows only when user is signed in -->
+    <section id="leaderboardBox">
+      <h3 id="welcomeMessage"></h3>
 
-    <button onclick="clearLeaderboard()">Clear Leaderboard</button>
-    <button onclick="addTestScore()">Add Test Score</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+
+        <tbody id="leaderboardTable">
+          <!-- Scores will appear here using JavaScript -->
+        </tbody>
+      </table>
+
+      <button onclick="addTestScore()">Add Test Score</button>
+      <button onclick="clearLeaderboard()">Clear Leaderboard</button>
+      <button onclick="logout()">Logout</button>
+    </section>
   </main>
 
   <script src="js/leaderboard.js"></script>
