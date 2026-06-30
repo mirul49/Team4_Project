@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TypeRush - Main Game</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Navigation bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <h1>TypeRush</h1>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Game</a>
+      <a href="login.html">Login</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="instructions.html">Instructions</a>
+      <a href="settings.html">Settings</a>
+    </div>
+  </nav>
+
+
+  <!-- Main game area -->
+  <main class="container">
+
+    <h2>TypeRush</h2>
+
+    <p>
+      Type the words shown below as fast and accurately as you can before the timer ends.
+    </p>
+
+
+    <!-- User status -->
+    <div class="card">
+      <h3 id="userStatus">You are not signed in.</h3>
+      <p>Sign in first if you want your score to be saved.</p>
+
+      <a href="login.html">
+        <button>Go to Login</button>
+      </a>
+    </div>
+
+
+    <!-- Game stats -->
+    <div class="card">
+      <p>Difficulty: <span id="difficultyText">Easy</span></p>
+      <p>Time Left: <span id="timeText">60</span> seconds</p>
+      <p>Score: <span id="scoreText">0</span></p>
+      <p>Accuracy: <span id="accuracyText">100</span>%</p>
+
+      <a href="settings.html">
+        <button>Change Difficulty</button>
+      </a>
+    </div>
+
+
+    <!-- Monkeytype-style typing area -->
+    <div class="card">
+      <h3>Typing Test</h3>
+
+      <div id="wordBox" class="word-box">
+        <!-- Words will appear here using JavaScript -->
+      </div>
+
+      <textarea 
+        id="typingInput" 
+        placeholder="Start typing here..."
+        rows="4"
+      ></textarea>
+
+      <br><br>
+
+      <button onclick="startGame()">Start Game</button>
+      <button onclick="restartGame()">Restart Game</button>
+    </div>
+
+
+    <!-- Game message -->
+    <p id="messageText"></p>
+
+  </main>
+
+
+  <script src="js/game.js"></script>
+
+</body>
+</html>
