@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TypeRush Leaderboard</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <h1>TypeRush</h1>
+
+    <div>
+      <a href="index.html">Game</a>
+      <a href="login.html">Login</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="instructions.html">Instructions</a>
+      <a href="settings.html">Settings</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h2>Leaderboard</h2>
+    <p>Top players are ranked from highest score to lowest score.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Username</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+
+      <tbody id="leaderboardTable">
+        <!-- Scores will appear here using JavaScript -->
+      </tbody>
+    </table>
+
+    <button onclick="clearLeaderboard()">Clear Leaderboard</button>
+    <button onclick="addTestScore()">Add Test Score</button>
+  </main>
+
+  <script src="js/leaderboard.js"></script>
+</body>
+</html>
