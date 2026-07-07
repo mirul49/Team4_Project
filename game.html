@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TypeRush</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+
+    <div class="logo">
+      <h1>TypeRush</h1>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="auth.html">Login</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="instructions.html">Instructions</a>
+      <a href="settings.html">Settings</a>
+    </div>
+
+  </nav>
+
+  <main class="container">
+
+    <h2>TypeRush</h2>
+
+    <p>
+      Type the words as quickly and accurately as possible before the timer runs out.
+    </p>
+
+    <div class="card">
+
+      <h3 id="userStatus">
+        Not Signed In
+      </h3>
+
+      <p>
+        Login if you want your score saved.
+      </p>
+
+      <a href="auth.html">
+        <button>Login</button>
+      </a>
+
+    </div>
+
+    <div class="card">
+
+      <p>Difficulty:
+        <span id="difficultyText">Easy</span>
+      </p>
+
+      <p>Time Left:
+        <span id="timeText">60</span>s
+      </p>
+
+      <p>Score:
+        <span id="scoreText">0</span>
+      </p>
+
+      <p>Accuracy:
+        <span id="accuracyText">100</span>%
+      </p>
+
+      <a href="settings.html">
+        <button>Difficulty</button>
+      </a>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Typing Test</h3>
+
+      <div id="wordBox" class="word-box"></div>
+
+      <textarea id="typingInput" rows="3" placeholder="Press Start Game..." disabled></textarea>
+
+      <br><br>
+
+      <button id="startBtn">Start Game</button>
+      <button id="restartBtn">Restart</button>
+
+    </div>
+
+    <p id="messageText"></p>
+
+  </main>
+
+  <script src="js/game.js"></script>
+
+</body>
+
+</html>
