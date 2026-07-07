@@ -1,1 +1,45 @@
+/* Game Page Styles */
+.word-box{
+    width:90%;
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+    min-height:120px;
+    background:#1d1d1d;
+    border-radius:10px;
+    font-size:30px;
+    line-height:50px;
+    color:#777;
+    text-align:left;
+}
 
+.word{
+    margin-right:12px;
+}
+
+.current{
+    color:white;
+    border-bottom:3px solid #00ff88;
+}
+
+.correct{
+    color:#00ff88;
+}
+
+.wrong{
+    color:red;
+}
+
+#typingInput{
+    width:90%;
+    max-width:900px;
+    font-size:22px;
+    padding:12px;
+    margin-top:20px;
+}
+
+#messageText{
+    text-align:center;
+    font-size:25px;
+    margin-top:20px;
+}
