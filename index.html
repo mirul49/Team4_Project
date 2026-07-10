@@ -2,15 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+<<<<<<< HEAD
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>TypeRush</title>
+=======
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TypeRush - Main Game</title>
+>>>>>>> team/main
 
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
+<<<<<<< HEAD
   <nav class="navbar">
     <a href="index.html" class="logo">
       TYPE<span>RUSH</span>
@@ -20,12 +28,24 @@
       <a href="index.html" class="active">Home</a>
       <a href="game.html">Game</a>
       <a href="auth.html">Login</a>
+=======
+  <!-- Navigation bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <h1>TypeRush</h1>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Game</a>
+      <a href="login.html">Login</a>
+>>>>>>> team/main
       <a href="leaderboard.html">Leaderboard</a>
       <a href="instructions.html">Instructions</a>
       <a href="settings.html">Settings</a>
     </div>
   </nav>
 
+<<<<<<< HEAD
   <main class="home-page">
 
     <section class="home-hero">
@@ -77,3 +97,72 @@
 
 </body>
 </html>
+=======
+
+  <!-- Main game area -->
+  <main class="container">
+
+    <h2>TypeRush</h2>
+
+    <p>
+      Type the words shown below as fast and accurately as you can before the timer ends.
+    </p>
+
+
+    <!-- User status -->
+    <div class="card">
+      <h3 id="userStatus">You are not signed in.</h3>
+      <p>Sign in first if you want your score to be saved.</p>
+
+      <a href="login.html">
+        <button>Go to Login</button>
+      </a>
+    </div>
+
+
+    <!-- Game stats -->
+    <div class="card">
+      <p>Difficulty: <span id="difficultyText">Easy</span></p>
+      <p>Time Left: <span id="timeText">60</span> seconds</p>
+      <p>Score: <span id="scoreText">0</span></p>
+      <p>Accuracy: <span id="accuracyText">100</span>%</p>
+
+      <a href="settings.html">
+        <button>Change Difficulty</button>
+      </a>
+    </div>
+
+
+    <!-- Monkeytype-style typing area -->
+    <div class="card">
+      <h3>Typing Test</h3>
+
+      <div id="wordBox" class="word-box">
+        <!-- Words will appear here using JavaScript -->
+      </div>
+
+      <textarea 
+        id="typingInput" 
+        placeholder="Press Start Game to begin..."
+        rows="4"
+        disabled
+      ></textarea>
+
+      <br><br>
+
+      <button onclick="startBtn">Start Game</button>
+      <button onclick="restartBtn">Restart Game</button>
+    </div>
+
+
+    <!-- Game message -->
+    <p id="messageText"></p>
+
+  </main>
+
+
+  <script src="js/game.js"></script>
+
+</body>
+</html>
+>>>>>>> team/main

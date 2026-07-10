@@ -144,4 +144,8 @@ function addTestScore() {
 
 
 // Display leaderboard when the page opens
+<<<<<<< HEAD
 displayLeaderboard();
+=======
+displayLeaderboard();
+>>>>>>> team/main
