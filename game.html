@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TypeRush - Game</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      TYPE<span>RUSH</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="game.html" class="active">Game</a>
+      <a href="auth.html">Login</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="instructions.html">Instructions</a>
+      <a href="settings.html">Settings</a>
+    </div>
+  </nav>
+
+  <main class="game-page">
+
+    <section class="game-heading">
+
+      <div>
+        <p class="eyebrow">Typing challenge</p>
+
+        <h1>Type fast. Stay accurate.</h1>
+
+        <p class="game-description">
+          Complete as many words as possible before the timer reaches zero.
+        </p>
+      </div>
+
+      <div class="player-card">
+        <span>Player</span>
+        <strong id="userStatus">Guest</strong>
+      </div>
+
+    </section>
+
+    <section class="stats-bar">
+
+      <div class="stat-box">
+        <span>Difficulty</span>
+        <strong id="difficultyText">Easy</strong>
+      </div>
+
+      <div class="stat-box">
+        <span>Time</span>
+        <strong><span id="timeText">60</span>s</strong>
+      </div>
+
+      <div class="stat-box">
+        <span>Score</span>
+        <strong id="scoreText">0</strong>
+      </div>
+
+      <div class="stat-box">
+        <span>Accuracy</span>
+        <strong><span id="accuracyText">100</span>%</strong>
+      </div>
+
+    </section>
+
+    <section class="game-panel">
+
+      <div class="game-panel-top">
+        <div>
+          <span class="status-dot"></span>
+          <span id="gameState">Ready</span>
+        </div>
+
+        <a href="settings.html">Change difficulty</a>
+      </div>
+
+      <div id="wordBox" class="word-box">
+        Press Start Game to begin.
+      </div>
+
+      <textarea
+        id="typingInput"
+        rows="2"
+        placeholder="Press Start Game..."
+        disabled
+      ></textarea>
+
+      <div class="game-buttons">
+        <button id="startBtn" class="primary-button">Start Game</button>
+        <button id="restartBtn" class="secondary-button">Restart</button>
+      </div>
+
+      <p id="messageText" class="game-message"></p>
+
+    </section>
+
+  </main>
+
+  <script src="js/game.js"></script>
+
+</body>
+
+</html>

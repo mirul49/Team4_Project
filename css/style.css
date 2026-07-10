@@ -1,0 +1,70 @@
+*{box-sizing:border-box}
+
+.navbar,.game-heading,.game-panel-top{display:flex;justify-content:space-between}
+.navbar{align-items:center;padding:18px 6%;background:white;border-bottom:1px solid #dbe3ec}
+
+.logo{font-size:22px;font-weight:bold;text-decoration:none}
+.logo,.stat-box strong{color:#1f2937}
+.logo span,.eyebrow,.player-card strong,.game-panel-top a{color:#3b82f6}
+
+.nav-links,.game-buttons{display:flex}
+.nav-links{gap:10px}
+.nav-links a{padding:9px 12px;color:#64748b;text-decoration:none;border-radius:7px}
+.nav-links a:hover,.nav-links a.active{color:white;background:#3b82f6}
+
+.game-page{width:min(1000px,90%);margin:auto;padding:45px 0}
+.game-heading{align-items:end;gap:25px;margin-bottom:25px}
+.eyebrow{margin:0 0 8px;font-size:13px;font-weight:bold;text-transform:uppercase}
+.game-heading h1{margin:0;font-size:44px}
+.game-description{line-height:1.6}
+.game-description,.player-card span,.stat-box span,.game-panel-top,.word-box,.input-label{color:#64748b}
+
+.player-card,.stat-box,.game-panel{background:white;border:1px solid #dbe3ec}
+.player-card,.stat-box{padding:18px;border-radius:12px}
+.player-card{min-width:170px;text-align:right}
+.player-card span,.stat-box span{display:block;font-size:12px}
+.player-card span{margin-bottom:5px}
+
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat-box span{margin-bottom:10px}
+.stat-box strong{font-size:28px}
+
+.game-panel{padding:30px;border-radius:16px;box-shadow:0 12px 30px rgba(30,64,175,.08)}
+.game-panel-top{margin-bottom:22px;font-size:14px}
+.game-panel-top a{text-decoration:none}
+.status-dot{display:inline-block;width:9px;height:9px;margin-right:8px;background:#22c55e;border-radius:50%}
+
+.word-box{min-height:170px;display:flex;align-items:center;justify-content:center;padding:25px;background:#eff6ff;border:2px dashed #93c5fd;border-radius:12px}
+.current-word{color:#1d4ed8;font-size:58px;font-weight:bold}
+.input-label{display:block;margin:20px 0 8px;font-size:13px}
+
+#typingInput{width:100%;padding:16px;resize:none;border:1px solid #cbd5e1;border-radius:10px;outline:none;font-size:16px}
+#typingInput:focus{border-color:#3b82f6;box-shadow:0 0 0 3px #dbeafe}
+#typingInput:disabled,.secondary-button:hover{background:#f1f5f9}
+
+.game-buttons{gap:12px;margin-top:18px}
+.primary-button,.secondary-button{padding:12px 22px;border-radius:8px;font-weight:bold;cursor:pointer}
+.primary-button{color:white;background:#3b82f6;border:none}
+.primary-button:hover{background:#2563eb}
+.secondary-button{color:#334155;background:white;border:1px solid #cbd5e1}
+button:disabled{cursor:not-allowed;opacity:.5}
+
+.game-message{min-height:22px;margin-top:16px;font-weight:bold}
+.correct-message{color:#16a34a}
+.incorrect-message{color:#dc2626}
+
+@media (max-width:760px){
+  .navbar,.game-heading{flex-direction:column;align-items:flex-start}
+  .nav-links{flex-wrap:wrap}
+  .player-card{width:100%;text-align:left}
+  .stats-bar{grid-template-columns:repeat(2,1fr)}
+  .game-heading h1{font-size:36px}
+  .current-word{font-size:40px}
+}
+
+@media (max-width:480px){
+  .stats-bar{grid-template-columns:1fr}
+  .game-panel{padding:20px}
+  .game-buttons{flex-direction:column}
+  .primary-button,.secondary-button{width:100%}
+}
