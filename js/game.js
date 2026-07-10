@@ -120,9 +120,29 @@ function endGame() {
   startBtn.disabled = false;
 
   gameState.textContent = "Finished";
-  message.textContent = "Game over! Final score: " + score;
+
+  const accuracy =
+    totalWords === 0
+      ? 100
+      : Math.round((correctWords / totalWords) * 100);
+
+  // Store the final result for result.html
+  sessionStorage.setItem(
+    "latestGameResult",
+    JSON.stringify({
+      username: getLoggedInUser() || "Guest",
+      score: score,
+      accuracy: accuracy,
+      correctWords: correctWords,
+      totalWords: totalWords,
+      difficulty: document.getElementById("difficultyText").textContent
+    })
+  );
 
   saveScore();
+
+  // Go to the result page
+  window.location.href = "result.html";
 }
 
 function saveScore() {
