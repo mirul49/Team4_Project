@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TypeRush - Main Game</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Navigation bar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo-link">
+      <div class="logo">
+        <img src="TypeRush.jpg" alt="TypeRush logo" class="site-logo">
+        <h1>TypeRush</h1>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="login.html">Login</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="settings.html">Settings</a>
+    </div>
+  </nav>
+
+
+  <!-- Main game area -->
+  <main class="container">
+
+    <h2>TypeRush</h2>
+
+    <p>
+      Type the words shown below as fast and accurately as you can before the timer ends.
+    </p>
+
+
+    <!-- User status -->
+    <div class="card">
+      <h3 id="userStatus">You are not signed in.</h3>
+      <p id="authDescription">Enter your name below to save your best typing result to the local leaderboard.</p>
+      <input id="playerNameInput" type="text" placeholder="Your name" maxlength="20">
+      <div id="authActions" class="auth-actions">
+        <a href="login.html">
+          <button type="button">Go to Login</button>
+        </a>
+      </div>
+    </div>
+
+
+    <!-- Monkeytype-style typing area -->
+    <div class="card">
+      <h3>Typing Test</h3>
+      <div class="typing-top-row">
+        <div class="action-buttons">
+          <button onclick="startGame()">Start Game</button>
+          <button onclick="restartGame()">Restart Game</button>
+        </div>
+
+        <div class="typing-stats-panel">
+          <div class="stat-item">
+            <span class="stat-label">Time Left</span>
+            <span class="stat-value"><span id="timeText">30</span>s</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Word Count</span>
+            <span class="stat-value"><span id="wordCountText">25</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">WPM</span>
+            <span class="stat-value"><span id="scoreText">0</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Accuracy</span>
+            <span class="stat-value"><span id="accuracyText">100</span>%</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="gameSettingsSummary" class="game-settings-summary">
+        Difficulty: normal · Blind: off · Word history: off
+      </div>
+
+      <div id="wordBox" class="word-box">
+        <!-- Words will appear here using JavaScript -->
+      </div>
+
+      <textarea 
+        id="typingInput" 
+        placeholder="Start typing here..."
+        rows="4"
+      ></textarea>
+
+      <div id="historyCard" class="card history-card hidden">
+        <h3>Word history</h3>
+        <p>These are the words completed during your last typing session.</p>
+        <div id="historyList" class="history-list"></div>
+      </div>
+
+      <div class="settings-card">
+        <div class="option-group">
+          <div class="option-label">Time</div>
+          <div class="mode-options" role="group" aria-label="Typing duration">
+            <button type="button" class="option-btn" data-option="time" data-value="10">10s</button>
+            <button type="button" class="option-btn" data-option="time" data-value="20">20s</button>
+            <button type="button" class="option-btn active" data-option="time" data-value="30">30s</button>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-label">Words</div>
+          <div class="mode-options" role="group" aria-label="Typing word count">
+            <button type="button" class="option-btn" data-option="words" data-value="15">15</button>
+            <button type="button" class="option-btn active" data-option="words" data-value="25">25</button>
+            <button type="button" class="option-btn" data-option="words" data-value="35">35</button>
+            <button type="button" class="option-btn" data-option="words" data-value="50">50</button>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-label">Features</div>
+          <div class="mode-options" role="group" aria-label="Typing features">
+            <button type="button" class="feature-btn" data-feature="punctuation">Punctuation</button>
+            <button type="button" class="feature-btn" data-feature="numbers">Numbers</button>
+            <button type="button" class="feature-btn" data-feature="caps">Caps</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Game message -->
+    <p id="messageText"></p>
+
+  </main>
+
+
+  <script src="js/game.js"></script>
+
+</body>
+</html>
