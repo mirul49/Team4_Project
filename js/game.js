@@ -53,7 +53,13 @@ function loadDifficulty() {
 }
 
 function generateWord() {
-  currentWord = words[Math.floor(Math.random() * words.length)];
+  let newWord;
+
+  do {
+    newWord = words[Math.floor(Math.random() * words.length)];
+  } while (newWord === currentWord && words.length > 1);
+
+  currentWord = newWord;
 }
 
 function displayWords() {
@@ -75,7 +81,7 @@ function startGame() {
   time = 60;
   totalWords = 0;
   correctWords = 0;
-  currentWord = 0;
+  currentWord = "";
 
   scoreText.textContent = "0";
   timeText.textContent = "60";
