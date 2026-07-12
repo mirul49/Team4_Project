@@ -1,26 +1,19 @@
 const words = [
-  "apple", "banana", "orange", "keyboard", "computer", "javascript",
-  "coding", "developer", "internet", "browser", "window", "docker",
-  "github", "network", "student", "holiday", "summer", "winter",
-  "school", "coffee", "monitor", "python", "software", "hardware",
-  "science", "rocket", "planet", "future", "algorithm", "database",
-  "website", "frontend", "backend", "security", "typing", "gaming"
+  "apple", "banana", "orange", "keyboard", "computer", "javascript", "coding",
+  "developer", "internet", "browser", "window", "docker", "github", "network",
+  "student", "holiday", "summer", "winter", "school", "coffee", "monitor", "python", 
+  "software", "hardware", "science", "rocket", "planet", "future", "algorithm", 
+  "database", "website", "frontend", "backend", "security", "typing", "gaming"
 ];
 
 let score = 0;
-let time = 60;
+let time = 0;
 let totalWords = 0;
 let correctWords = 0;
-<<<<<<< HEAD
-let timer;
+let timer = null;
 let running = false;
 let currentWord = "";
-=======
-let currentWord = 0;
-let timer;
-let running = false;
-let gameWords = [];
->>>>>>> team/main
+let selectedDifficulty = "";
 
 const wordBox = document.getElementById("wordBox");
 const input = document.getElementById("typingInput");
@@ -29,11 +22,13 @@ const timeText = document.getElementById("timeText");
 const accuracyText = document.getElementById("accuracyText");
 const message = document.getElementById("messageText");
 const userStatus = document.getElementById("userStatus");
-<<<<<<< HEAD
+const difficultyText = document.getElementById("difficultyText");
 const gameState = document.getElementById("gameState");
 const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
 
+
+/* Get logged-in player */
 function getLoggedInUser() {
   const localUser = localStorage.getItem("currentUser");
   const sessionUser = sessionStorage.getItem("loggedInUser");
@@ -41,6 +36,8 @@ function getLoggedInUser() {
   return localUser || sessionUser;
 }
 
+
+/* Display player name */
 function loadUser() {
   const user = getLoggedInUser();
 
@@ -51,115 +48,123 @@ function loadUser() {
   }
 }
 
-function loadDifficulty() {
-  const savedDifficulty =
-    localStorage.getItem("difficulty") ||
-    localStorage.getItem("selectedDifficulty") ||
-    "Easy";
 
-  document.getElementById("difficultyText").textContent = savedDifficulty;
+/* Read difficulty selected on settings.html */
+function loadDifficulty() {
+  selectedDifficulty =
+    localStorage.getItem("selectedDifficulty") ||
+    localStorage.getItem("difficulty") ||
+    "";
+
+  /*
+    If no difficulty was selected,
+    send the user to settings.html first.
+  */
+  if (!selectedDifficulty) {
+    window.location.href = "settings.html";
+    return;
+  }
+
+  difficultyText.textContent = selectedDifficulty;
+  time = getDifficultyTime();
+
+  timeText.textContent = time;
 }
 
+
+/* Return the correct game time */
+function getDifficultyTime() {
+  if (selectedDifficulty === "Medium") {
+    return 45;
+  }
+
+  if (selectedDifficulty === "Hard") {
+    return 30;
+  }
+
+  return 60;
+}
+
+
+/* Generate a word without immediate repetition */
 function generateWord() {
   let newWord;
 
   do {
-    newWord = words[Math.floor(Math.random() * words.length)];
-  } while (newWord === currentWord && words.length > 1);
+    newWord =
+      words[Math.floor(Math.random() * words.length)];
+  } while (
+    newWord === currentWord &&
+    words.length > 1
+  );
 
   currentWord = newWord;
-=======
-
-function loadUser() {
-  const user = localStorage.getItem("currentUser");
-  if (user) {
-    userStatus.textContent = "Signed in as " + user;
-  }
 }
 
-loadUser();
 
-function generateWords() {
-  gameWords = [];
-  for (let i = 0; i < 40; i++) {
-    gameWords.push(
-      words[Math.floor(Math.random() * words.length)]
-    );
-  }
->>>>>>> team/main
-}
-
-function displayWords() {
+/* Display the current word */
+function displayWord() {
   wordBox.innerHTML = "";
-<<<<<<< HEAD
 
-  const span = document.createElement("span");
+  const wordSpan = document.createElement("span");
 
-  span.innerText = currentWord;
-  span.className = "current-word";
+  wordSpan.textContent = currentWord;
+  wordSpan.className = "current-word";
 
-  wordBox.appendChild(span);
-=======
-  
-  gameWords.forEach((word, index) => {
-    let span = document.createElement("span");
-    span.innerText = word;
-    span.className = "word";
-
-    if (index === 0) {
-      span.classList.add("current");
-    }
-
-    wordBox.appendChild(span);
-
-  });
->>>>>>> team/main
+  wordBox.appendChild(wordSpan);
 }
 
-function startGame() {
-  clearInterval(timer);
-<<<<<<< HEAD
 
-=======
->>>>>>> team/main
+/* Start the game */
+function startGame() {
+  /*
+    Check again in case difficulty was removed
+    after the page loaded.
+  */
+  selectedDifficulty =
+    localStorage.getItem("selectedDifficulty") ||
+    localStorage.getItem("difficulty") ||
+    "";
+
+  if (!selectedDifficulty) {
+    window.location.href = "settings.html";
+    return;
+  }
+
+  clearInterval(timer);
+
   running = true;
   score = 0;
-  time = 60;
   totalWords = 0;
   correctWords = 0;
-<<<<<<< HEAD
   currentWord = "";
+  time = getDifficultyTime();
 
+  difficultyText.textContent = selectedDifficulty;
   scoreText.textContent = "0";
-  timeText.textContent = "60";
+  timeText.textContent = time;
   accuracyText.textContent = "100";
+
   message.textContent = "";
+  message.style.color = "";
+
   gameState.textContent = "In progress";
 
   generateWord();
-=======
-  currentWord = 0;
-
-  scoreText.textContent = 0;
-  timeText.textContent = 60;
-  accuracyText.textContent = 100;
-  message.textContent = "";
-
-  generateWords();
->>>>>>> team/main
-  displayWords();
+  displayWord();
 
   input.disabled = false;
   input.value = "";
+  input.placeholder =
+    "Type the word and press Enter";
+
   input.focus();
 
-<<<<<<< HEAD
   startBtn.disabled = true;
 
-=======
->>>>>>> team/main
   timer = setInterval(function () {
     time--;
+
     timeText.textContent = time;
 
     if (time <= 0) {
@@ -168,13 +173,41 @@ function startGame() {
   }, 1000);
 }
 
+
+/* Restart using the same selected difficulty */
 function restartGame() {
-  startGame();
+  clearInterval(timer);
+
+  running = false;
+  score = 0;
+  totalWords = 0;
+  correctWords = 0;
+  currentWord = "";
+  time = getDifficultyTime();
+
+  scoreText.textContent = "0";
+  timeText.textContent = time;
+  accuracyText.textContent = "100";
+
+  input.disabled = true;
+  input.value = "";
+  input.placeholder = "Press Start Game...";
+
+  wordBox.textContent =
+    "Press Start Game to begin.";
+
+  gameState.textContent = "Ready";
+
+  message.textContent = "";
+  message.style.color = "";
+
+  startBtn.disabled = false;
 }
 
+
+/* Finish the game */
 function endGame() {
   clearInterval(timer);
-<<<<<<< HEAD
 
   running = false;
   input.disabled = true;
@@ -185,27 +218,31 @@ function endGame() {
   const accuracy =
     totalWords === 0
       ? 100
-      : Math.round((correctWords / totalWords) * 100);
+      : Math.round(
+        (correctWords / totalWords) * 100
+      );
 
-  // Store the final result for result.html
+  const result = {
+    username: getLoggedInUser() || "Guest",
+    score: score,
+    accuracy: accuracy,
+    correctWords: correctWords,
+    totalWords: totalWords,
+    difficulty: selectedDifficulty
+  };
+
   sessionStorage.setItem(
     "latestGameResult",
-    JSON.stringify({
-      username: getLoggedInUser() || "Guest",
-      score: score,
-      accuracy: accuracy,
-      correctWords: correctWords,
-      totalWords: totalWords,
-      difficulty: document.getElementById("difficultyText").textContent
-    })
+    JSON.stringify(result)
   );
 
   saveScore();
 
-  // Go to the result page
   window.location.href = "result.html";
 }
 
+
+/* Save score for leaderboard */
 function saveScore() {
   const username = getLoggedInUser();
 
@@ -213,120 +250,105 @@ function saveScore() {
     return;
   }
 
-  let scores;
+  let scores = [];
 
   try {
-    scores = JSON.parse(localStorage.getItem("scores")) || [];
+    scores =
+      JSON.parse(
+        localStorage.getItem("scores")
+      ) || [];
+
+    if (!Array.isArray(scores)) {
+      scores = [];
+    }
   } catch (error) {
     scores = [];
   }
-=======
-  running = false;
-  input.disabled = true
-  message.innerHTML = "Game Over!<br>Final Score : " + score;
-  saveScore();
-}
-
-function saveScore() {
-  const username = localStorage.getItem("currentUser");
-  if (!username) return;
-  let scores = JSON.parse(localStorage.getItem("scores")) || [];
->>>>>>> team/main
 
   scores.push({
     username: username,
-    score: score
+    score: score,
+    difficulty: selectedDifficulty
   });
 
-<<<<<<< HEAD
-  scores.sort(function (a, b) {
-    return b.score - a.score;
+  scores.sort(function (first, second) {
+    return second.score - first.score;
   });
-=======
-  scores.sort((a, b) => b.score - a.score);
->>>>>>> team/main
 
-  localStorage.setItem("scores", JSON.stringify(scores));
+  localStorage.setItem(
+    "scores",
+    JSON.stringify(scores)
+  );
 }
 
-input.addEventListener("keydown", function (e) {
-<<<<<<< HEAD
 
-  if (e.key !== "Enter") return;
-=======
-  if (e.key !== " ") return;
->>>>>>> team/main
+/* Check submitted word */
+input.addEventListener(
+  "keydown",
+  function (event) {
+    if (event.key !== "Enter") {
+      return;
+    }
 
-  e.preventDefault();
+    event.preventDefault();
 
-  if (!running) return;
+    if (!running) {
+      return;
+    }
 
-  let typed = input.value.trim();
+    const typedWord = input.value.trim();
 
-  totalWords++;
+    if (typedWord === "") {
+      return;
+    }
 
-<<<<<<< HEAD
-  if (typed.toLowerCase() === currentWord.toLowerCase()) {
+    totalWords++;
 
-    score += 10;
-    correctWords++;
+    if (
+      typedWord.toLowerCase() ===
+      currentWord.toLowerCase()
+    ) {
+      score += 10;
+      correctWords++;
 
-    message.textContent = "Correct!";
-    message.style.color = "green";
+      message.textContent = "Correct!";
+      message.style.color = "green";
+    } else {
+      message.textContent =
+        "Wrong! The word was " +
+        currentWord;
 
-  } else {
+      message.style.color = "red";
+    }
 
-    message.textContent =
-      "Wrong! The word was " + currentWord;
+    const accuracy = Math.round(
+      (correctWords / totalWords) * 100
+    );
 
-    message.style.color = "red";
+    scoreText.textContent = score;
+    accuracyText.textContent = accuracy;
+
+    input.value = "";
+
+    generateWord();
+    displayWord();
   }
+);
 
-  scoreText.textContent = score;
 
-  accuracyText.textContent =
-    Math.round(correctWords / totalWords * 100);
+/* Button connections */
+startBtn.addEventListener(
+  "click",
+  startGame
+);
 
-  input.value = "";
+restartBtn.addEventListener(
+  "click",
+  restartGame
+);
 
-  generateWord();
-  displayWords();
 
-});
-
-startBtn.addEventListener("click", startGame);
-restartBtn.addEventListener("click", restartGame);
+/* Load page information */
 
 loadUser();
 loadDifficulty();
-=======
-  const spans = document.querySelectorAll(".word");
-
-  if (typed === gameWords[currentWord]) {
-    score += 10;
-    correctWords++;
-    spans[currentWord].classList.remove("current");
-    spans[currentWord].classList.add("correct");
-  } else {
-    spans[currentWord].classList.remove("current");
-    spans[currentWord].classList.add("wrong");
-  }
-
-  currentWord++;
-
-  if (currentWord >= gameWords.length) {
-    generateWords();
-    displayWords();
-    currentWord = 0;
-  } else {
-    spans[currentWord].classList.add("current");
-  }
-
-  scoreText.textContent = score;
-  accuracyText.textContent = Math.round(correctWords / totalWords * 100);
-  input.value = "";
-});
-
-document.getElementById("startBtn").addEventListener("click", startGame);
-document.getElementById("restartBtn").addEventListener("click", restartGame);
->>>>>>> team/main
