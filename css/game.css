@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 /* TypeRush Game Page */
-
 * {
   box-sizing: border-box;
 }
@@ -15,7 +13,6 @@ body {
 
 
 /* Navigation bar */
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -56,7 +53,6 @@ body {
 
 
 /* Main game page */
-
 .game-page {
   width: min(1000px, 90%);
   margin: auto;
@@ -111,7 +107,6 @@ body {
 
 
 /* Statistics */
-
 .stats-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -127,7 +122,6 @@ body {
 }
 
 /* Label */
-
 .stat-box > span {
   display: block;
   margin-bottom: 10px;
@@ -162,7 +156,6 @@ body {
 
 
 /* Main game panel */
-
 .game-panel {
   padding: 30px;
   background: white;
@@ -195,7 +188,6 @@ body {
 
 
 /* Word display */
-
 .word-box {
   min-height: 170px;
   display: flex;
@@ -217,7 +209,6 @@ body {
 
 
 /* Typing input */
-
 .input-label {
   display: block;
   margin: 20px 0 8px;
@@ -247,7 +238,6 @@ body {
 
 
 /* Buttons */
-
 .game-buttons {
   display: flex;
   gap: 12px;
@@ -289,7 +279,6 @@ button:disabled {
 
 
 /* Messages */
-
 .game-message {
   min-height: 22px;
   margin-top: 16px;
@@ -306,7 +295,6 @@ button:disabled {
 
 
 /* Tablet and mobile */
-
 @media (max-width: 760px) {
   .navbar,
   .game-heading {
@@ -356,7 +344,6 @@ button:disabled {
 }
 
 /* Result page */
-
 .result-page {
   width: min(850px, 90%);
   margin: auto;
@@ -471,7 +458,6 @@ button:disabled {
 
 
 /* Result page responsive design */
-
 @media (max-width: 760px) {
   .result-stats {
     grid-template-columns: repeat(2, 1fr);
@@ -504,50 +490,3 @@ button:disabled {
     width: 100%;
   }
 }
-=======
-/* Game Page Styles */
-.word-box{
-    width:90%;
-    max-width:900px;
-    margin:auto;
-    padding:20px;
-    min-height:120px;
-    background:#1d1d1d;
-    border-radius:10px;
-    font-size:30px;
-    line-height:50px;
-    color:#777;
-    text-align:left;
-}
-
-.word{
-    margin-right:12px;
-}
-
-.current{
-    color:white;
-    border-bottom:3px solid #00ff88;
-}
-
-.correct{
-    color:#00ff88;
-}
-
-.wrong{
-    color:red;
-}
-
-#typingInput{
-    width:90%;
-    max-width:900px;
-    font-size:22px;
-    padding:12px;
-    margin-top:20px;
-}
-
-#messageText{
-    text-align:center;
-    font-size:25px;
-    margin-top:20px;
-}
->>>>>>> team/main
