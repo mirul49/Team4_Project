@@ -119,3 +119,6 @@ app.post("/api/login", (req, res) => {
 app.listen(PORT, () => {
   console.log(`TypeRush server running at http://localhost:${PORT}`);
 });
+app.listen(PORT, () => {
+  console.log(`TypeRush server running at http://localhost:${PORT}`);
+});
