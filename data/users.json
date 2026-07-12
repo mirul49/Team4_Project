@@ -7,6 +7,17 @@
     {
       "username": "qwe",
       "password": "qwe"
+<<<<<<< HEAD
+=======
+    },
+    {
+      "username": "Jason",
+      "password": "password"
+    },
+    {
+      "username": "testing",
+      "password": "password"
+>>>>>>> main
     }
   ]
 }
