@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TypeRush - Game</title>
+
+  <link rel="stylesheet" href="css/game.css">
+</head>
+
+<body>
+
+  <!-- Navigation bar -->
+  <nav class="navbar">
+
+    <a href="index.html" class="logo">
+      TypeRush
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="game.html" class="active">Game</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="instructions.html">Instructions</a>
+      <a href="settings.html">Settings</a>
+    </div>
+
+  </nav>
+
+
+  <main class="page-container">
+
+    <!-- Player information -->
+    <section class="player-panel">
+
+      <div class="player-message">
+
+        <p class="eyebrow">
+          Player Account
+        </p>
+
+        <h2 id="loginHeading">
+          Play as a guest
+        </h2>
+
+        <p id="loginDescription">
+          Log in or create an account to save your result to the leaderboard.
+        </p>
+
+      </div>
+
+      <div id="guestActions" class="guest-actions">
+
+        <a href="login.html" class="primary-button account-link">
+          Log In
+        </a>
+
+        <a href="register.html" class="secondary-button account-link">
+          Register
+        </a>
+
+      </div>
+
+      <strong id="userStatus" class="player-name" hidden>
+        Guest
+      </strong>
+
+    </section>
+
+
+    <!-- Main game card -->
+    <section class="game-card">
+
+      <!-- Game heading -->
+      <div class="game-card-heading">
+
+        <div>
+          <p class="eyebrow">
+            TypeRush
+          </p>
+
+          <h1>Typing Test</h1>
+        </div>
+
+
+        <div class="game-actions">
+
+          <button id="startBtn" class="primary-button" type="button">
+            Start Game
+          </button>
+
+          <button id="restartBtn" class="secondary-button" type="button" disabled>
+            Restart
+          </button>
+
+          <a href="settings.html" class="secondary-button settings-link">
+            Settings
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Current game settings -->
+      <section class="selected-settings">
+
+        <div class="selected-setting">
+
+          <span>Difficulty</span>
+
+          <strong id="difficultyText">
+            Normal
+          </strong>
+
+        </div>
+
+
+        <div class="selected-setting">
+
+          <span>Duration</span>
+
+          <strong>
+            <span id="durationText">20</span>s
+          </strong>
+
+        </div>
+
+      </section>
+
+
+      <!-- Statistics -->
+      <section class="stats-grid">
+
+        <div class="stat-card">
+
+          <span>Time Left</span>
+
+          <strong>
+            <span id="timeText">20</span>s
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>Word Count</span>
+
+          <strong id="wordCountText">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>WPM</span>
+
+          <strong id="wpmText">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>Accuracy</span>
+
+          <strong>
+            <span id="accuracyText">100</span>%
+          </strong>
+
+        </div>
+
+      </section>
+
+
+      <!-- Game status -->
+      <div class="current-settings">
+
+        <span class="status-dot"></span>
+
+        <span id="gameState">
+          Ready
+        </span>
+
+        <span class="settings-separator">•</span>
+
+        <span id="modeDescription">
+          Classic typing mode
+        </span>
+
+      </div>
+
+
+      <!-- Words -->
+      <div id="wordBox" class="word-box" aria-live="polite">
+        Press Start Game when you are ready.
+      </div>
+
+
+      <!-- Typing input -->
+      <label for="typingInput" class="input-label">
+        Type each word and press Space or Enter
+      </label>
+
+      <textarea id="typingInput" rows="3" placeholder="Press Start Game first..." autocomplete="off"
+        autocapitalize="off" spellcheck="false" disabled></textarea>
+
+
+      <!-- Feedback message -->
+      <p id="messageText" class="game-message" aria-live="polite"></p>
+
+    </section>
+
+  </main>
+
+
+  <script src="js/game.js"></script>
+
+</body>
+
+</html>
