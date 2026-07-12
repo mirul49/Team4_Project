@@ -481,7 +481,8 @@ input {
 
 .word-box {
   height: 170px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: 20px;
   background: #f8fbff;
   border: 1px dashed #b7c9dd;
