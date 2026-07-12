@@ -106,9 +106,18 @@ function loadUser() {
 // LOAD SAVED SETTINGS
 
 function loadGameSettings() {
-  const savedDifficulty = localStorage.getItem("gameDifficulty");
 
-  const savedDuration = Number(localStorage.getItem("gameDuration"));
+  const savedDifficultyRaw =
+    localStorage.getItem("typerush-setting-difficulty");
+
+  const savedDifficulty =
+    savedDifficultyRaw
+      ? savedDifficultyRaw.charAt(0).toUpperCase() +
+        savedDifficultyRaw.slice(1).toLowerCase()
+      : null;
+
+  const savedDuration =
+    Number(localStorage.getItem("gameDuration"));
 
   const validDifficulties = [
     "Normal",
@@ -121,43 +130,25 @@ function loadGameSettings() {
     30
   ];
 
-
   // Use saved difficulty only if it is valid.
-  if (
-    validDifficulties.includes(
-      savedDifficulty
-    )
-  ) {
-    selectedDifficulty =
-      savedDifficulty;
+  if (validDifficulties.includes(savedDifficulty)) {
+    selectedDifficulty = savedDifficulty;
   } else {
     selectedDifficulty = "Normal";
   }
 
-
   // Use saved duration only if it is 20 or 30.
-  if (
-    validDurations.includes(
-      savedDuration
-    )
-  ) {
-    selectedDuration =
-      savedDuration;
+  if (validDurations.includes(savedDuration)) {
+    selectedDuration = savedDuration;
   } else {
     selectedDuration = 20;
   }
 
-
   timeLeft = selectedDuration;
 
-  difficultyText.textContent =
-    selectedDifficulty;
-
-  durationText.textContent =
-    selectedDuration;
-
-  timeText.textContent =
-    selectedDuration;
+  difficultyText.textContent = selectedDifficulty;
+  durationText.textContent = selectedDuration;
+  timeText.textContent = selectedDuration;
 
   displayModeDescription();
 }
@@ -366,7 +357,7 @@ input.addEventListener(
       return;
     }
 
-    // Remove any line breaks.
+    // Remove line breaks
     input.value =
       input.value.replace(/\n/g, "");
 
@@ -375,7 +366,7 @@ input.addEventListener(
     if (
       selectedDifficulty === "Master"
     ) {
-      checkMasterMode();
+      checkImmediateFailure();
     }
   }
 );
@@ -445,12 +436,9 @@ function updateCharacterHighlighting() {
 
 // Master mode fails when one incorrect
 // character is entered.
-function checkMasterMode() {
-  const typedWord =
-    getCurrentTypedWord();
-
-  const correctWord =
-    gameWords[currentWordIndex];
+function checkImmediateFailure() {
+  const typedWord = getCurrentTypedWord();
+  const correctWord = gameWords[currentWordIndex];
 
   for (
     let index = 0;
@@ -465,22 +453,21 @@ function checkMasterMode() {
 
       endGame(
         true,
-        "Master mode failed: an incorrect character was pressed."
+        selectedDifficulty +
+        " mode failed: an incorrect character was typed."
       );
 
       return;
     }
   }
 
-  if (
-    typedWord.length >
-    correctWord.length
-  ) {
+  if (typedWord.length > correctWord.length) {
     incorrectCharacters++;
 
     endGame(
       true,
-      "Master mode failed: too many characters were entered."
+      selectedDifficulty +
+      " mode failed: too many characters were typed."
     );
   }
 }
