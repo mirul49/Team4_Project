@@ -84,7 +84,7 @@ function loadUser() {
     guestActions.hidden = true;
 
     loginHeading.textContent =
-      "Welcome back, " + username + "!";
+      "Hello, " + username + "!";
 
     loginDescription.textContent =
       "Your result will be saved to the leaderboard.";
