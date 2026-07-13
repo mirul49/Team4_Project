@@ -12,10 +12,12 @@
 
 <body>
 
-  <!-- Navigation bar -->
+  <!-- Navigation Bar -->
   <nav class="navbar">
-    <a href="index.html" class="logo">
-      TypeRush
+    <a href="index.html" class="logo-link">
+      <div class="logo">
+        <h1>TypeRush</h1>
+      </div>
     </a>
 
     <div class="nav-links">
@@ -23,61 +25,65 @@
       <a href="game.html">Game</a>
       <a href="login.html">Login</a>
       <a href="leaderboard.html">Leaderboard</a>
-      <a href="instructions.html">Instructions</a>
       <a href="settings.html">Settings</a>
     </div>
   </nav>
 
-  <!-- Home page content -->
-  <main class="home-page">
+  <!-- Main Content -->
+  <main class="container">
 
-    <section class="home-hero">
-      <p class="eyebrow">Typing speed challenge</p>
+    <!-- Hero Section -->
+    <section class="card">
 
-      <h1>
-        Type faster.<br>
-        Think sharper.
-      </h1>
+      <h2>Type Faster. Think Sharper.</h2>
 
-      <p class="home-description">
-        Race against the clock, improve your typing accuracy,
-        and achieve your highest score.
+      <p>
+        Race against the clock, improve your typing speed and accuracy,
+        and challenge yourself to achieve the highest score.
       </p>
 
-      <div class="home-actions">
-        <a href="game.html" class="primary-link">Play TypeRush</a>
-        <a href="instructions.html" class="secondary-link">
+      <div class="action-buttons">
+        <button onclick="location.href='game.html'">
+          Play TypeRush
+        </button>
+
+        <button onclick="location.href='instructions.html'">
           How to Play
-        </a>
-      </div>
-    </section>
-
-    <section class="home-preview">
-
-      <div class="preview-top">
-        <span class="preview-status">
-          <span class="status-dot"></span>
-          Ready to type
-        </span>
-
-        <span>60 seconds</span>
-      </div>
-
-      <div class="preview-words">
-        <span class="preview-current">keyboard</span>
-        <span>javascript</span>
-        <span>developer</span>
-        <span>computer</span>
-        <span>accuracy</span>
-        <span>challenge</span>
-        <span>typing</span>
-      </div>
-
-      <div class="preview-input">
-        Start typing here...
+        </button>
       </div>
 
     </section>
+
+    <section class="card">
+
+      <h2>Why Choose TypeRush?</h2>
+
+      <div class="typing-stats-panel">
+
+        <div class="stat-item">
+          <span class="stat-label">⚡ Speed</span>
+          <span class="stat-value">Improve your typing speed.</span>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-label">🎯 Accuracy</span>
+          <span class="stat-value">Increase typing accuracy.</span>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-label">🏆 Leaderboard</span>
+          <span class="stat-value">Compete with other players.</span>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-label">⚙ Difficulty</span>
+          <span class="stat-value">Normal, Expert and Master.</span>
+        </div>
+
+      </div>
+
+    </section>
+
 
   </main>
 
