@@ -81,34 +81,3 @@ function displayResultMessage(result) {
 // Run when result.html opens
 displayResult();
 
-// Save score to leaderboard
-async function saveScoreToLeaderboard(result) {
-
-  // Only save scores for 20s or 30s games
-  if (result.duration !== 20 && result.duration !== 30) {
-    return;
-  }
-
-  try {
-    const response = await fetch("/api/leaderboard", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        username: result.username,
-        score: result.score,
-        timeMode: result.duration
-      })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error(data.message);
-    }
-
-  } catch (error) {
-    console.error("Unable to save leaderboard:", error);
-  }
-}
