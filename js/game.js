@@ -19,6 +19,7 @@ const words = [
 
 let selectedDifficulty = "Normal";
 let selectedDuration = 20;
+let blindMode = "off";
 
 
 // GAME VARIABLES
@@ -128,11 +129,11 @@ function loadGameSettings() {
   const savedDifficulty =
     savedDifficultyRaw
       ? savedDifficultyRaw
-          .charAt(0)
-          .toUpperCase() +
-        savedDifficultyRaw
-          .slice(1)
-          .toLowerCase()
+        .charAt(0)
+        .toUpperCase() +
+      savedDifficultyRaw
+        .slice(1)
+        .toLowerCase()
       : null;
 
   const savedDuration =
@@ -152,6 +153,14 @@ function loadGameSettings() {
     20,
     30
   ];
+
+  const savedBlindMode =
+    localStorage.getItem("typerush-setting-blindMode");
+
+  blindMode =
+    savedBlindMode === "on"
+      ? "on"
+      : "off";
 
 
   // Use the saved difficulty only
@@ -215,6 +224,12 @@ function displayModeDescription() {
   } else {
     modeDescription.textContent =
       "Classic typing mode";
+  }
+
+  // Show Blind Mode if enabled
+  if (blindMode === "on") {
+    modeDescription.textContent +=
+      " • Blind Mode";
   }
 }
 
@@ -346,7 +361,7 @@ function appendNextWord() {
 
   const lastDisplayedWord =
     displayedWords[
-      displayedWords.length - 1
+    displayedWords.length - 1
     ];
 
   const lastDisplayedIndex =
@@ -414,15 +429,15 @@ function startGame() {
 
   timeLeft = selectedDuration;
   elapsedSeconds = 0;
-  
+
   currentWordIndex = 0;
-  
+
   correctWords = 0;
   incorrectWords = 0;
 
   correctCharacters = 0;
   incorrectCharacters = 0;
-  
+
   running = true;
 
 
@@ -449,22 +464,22 @@ function startGame() {
 
 
   timer = setInterval(function () {
-      timeLeft--;
-      elapsedSeconds++;
+    timeLeft--;
+    elapsedSeconds++;
 
-      timeText.textContent = timeLeft;
+    timeText.textContent = timeLeft;
 
-      updateStatistics();
+    updateStatistics();
 
-      if (
-        timeLeft <= 0
-      ) {
-        endGame(
-          false,
-          "Time completed."
-        );
-      }
-    }, 1000);
+    if (
+      timeLeft <= 0
+    ) {
+      endGame(
+        false,
+        "Time completed."
+      );
+    }
+  }, 1000);
 }
 
 
@@ -507,6 +522,11 @@ function getCurrentTypedWord() {
 // CHARACTER HIGHLIGHTING
 
 function updateCharacterHighlighting() {
+
+  if (blindMode === "on") {
+    return;
+  }
+
   const currentWordElement =
     wordBox.querySelector(
       `[data-word-index="${currentWordIndex}"]`
@@ -519,7 +539,7 @@ function updateCharacterHighlighting() {
 
   const correctWord =
     gameWords[
-      currentWordIndex
+    currentWordIndex
     ];
 
   const typedWord =
@@ -553,10 +573,10 @@ function updateCharacterHighlighting() {
 
       if (
         typedWord[
-          characterIndex
+        characterIndex
         ] ===
         correctWord[
-          characterIndex
+        characterIndex
         ]
       ) {
         characterElement.classList.add(
@@ -580,7 +600,7 @@ function checkImmediateFailure() {
 
   const correctWord =
     gameWords[
-      currentWordIndex
+    currentWordIndex
     ];
 
 
@@ -659,7 +679,7 @@ function submitCurrentWord() {
 
   const correctWord =
     gameWords[
-      currentWordIndex
+    currentWordIndex
     ];
 
   const wordElement =
@@ -765,7 +785,7 @@ function submitCurrentWord() {
   appendNextWord();
 
   input.value = "";
-  
+
   updateStatistics();
   updateCharacterHighlighting();
   scrollCurrentWordIntoView();
@@ -818,11 +838,11 @@ function updateStatistics() {
     totalCharacters === 0
       ? 100
       : Math.round(
-          (
-            correctCharacters /
-            totalCharacters
-          ) * 100
-        );
+        (
+          correctCharacters /
+          totalCharacters
+        ) * 100
+      );
 
 
   const minutes =
@@ -833,10 +853,10 @@ function updateStatistics() {
     minutes <= 0
       ? 0
       : Math.round(
-          correctCharacters /
-          5 /
-          minutes
-        );
+        correctCharacters /
+        5 /
+        minutes
+      );
 
 
   wordCountText.textContent =
@@ -907,11 +927,11 @@ function endGame(
     totalCharacters === 0
       ? 100
       : Math.round(
-          (
-            correctCharacters /
-            totalCharacters
-          ) * 100
-        );
+        (
+          correctCharacters /
+          totalCharacters
+        ) * 100
+      );
 
 
   const secondsPlayed =
@@ -1035,8 +1055,8 @@ function saveScore(result) {
     scores =
       savedScores
         ? JSON.parse(
-            savedScores
-          )
+          savedScores
+        )
         : [];
 
 
@@ -1076,29 +1096,37 @@ function saveScore(result) {
   };
 
 
-  scores.push(
-    newScore
-  );
+  const existingIndex = scores.findIndex(function (item) {
+    return (
+      item.username === username &&
+      item.timeLimit === result.duration
+    );
+  });
 
+  if (existingIndex === -1) {
+    // First score for this mode
+    scores.push(newScore);
+  } else {
+    const oldScore = scores[existingIndex];
 
-  scores.sort(function (
-    first,
-    second
-  ) {
+    // Replace only if new score is better
     if (
-      second.score !==
-      first.score
+      newScore.score > oldScore.score ||
+      (
+        newScore.score === oldScore.score &&
+        newScore.accuracy > oldScore.accuracy
+      )
     ) {
-      return (
-        second.score -
-        first.score
-      );
+      scores[existingIndex] = newScore;
+    }
+  }
+
+  scores.sort(function (first, second) {
+    if (second.score !== first.score) {
+      return second.score - first.score;
     }
 
-    return (
-      second.accuracy -
-      first.accuracy
-    );
+    return second.accuracy - first.accuracy;
   });
 
 
