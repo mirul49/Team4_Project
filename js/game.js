@@ -1023,125 +1023,46 @@ function endGame(
 
 // SAVE SCORE
 
-function saveScore(result) {
-  const username =
-    getLoggedInUser();
+// SAVE SCORE TO DATABASE
 
+async function saveScore(result) {
+  const username = getLoggedInUser();
 
   // Guest scores are not saved.
   if (!username) {
-    console.log(
-      "Leaderboard score was not saved because the player is a guest."
-    );
-
     return;
   }
 
-
-  const storageKey =
-    "typerush-leaderboard";
-
-
-  let scores = [];
-
-
   try {
-    const savedScores =
-      localStorage.getItem(
-        storageKey
+    const response = await fetch("/api/leaderboard", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: username,
+        score: result.score,
+        timeMode: result.duration
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.message ||
+        "Unable to save leaderboard score."
       );
-
-
-    scores =
-      savedScores
-        ? JSON.parse(
-          savedScores
-        )
-        : [];
-
-
-    if (
-      !Array.isArray(scores)
-    ) {
-      scores = [];
     }
   } catch (error) {
-    console.error(
-      "Unable to load leaderboard scores:",
-      error
-    );
+    message.textContent =
+      "Score could not be saved: " +
+      error.message;
 
-    scores = [];
+    message.className =
+      "game-message incorrect-message";
   }
-
-
-  const newScore = {
-    username:
-      username,
-
-    score:
-      result.score,
-
-    accuracy:
-      result.accuracy,
-
-    timeLimit:
-      result.duration,
-
-    difficulty:
-      result.difficulty,
-
-    wpm:
-      result.wpm
-  };
-
-
-  const existingIndex = scores.findIndex(function (item) {
-    return (
-      item.username === username &&
-      item.timeLimit === result.duration
-    );
-  });
-
-  if (existingIndex === -1) {
-    // First score for this mode
-    scores.push(newScore);
-  } else {
-    const oldScore = scores[existingIndex];
-
-    // Replace only if new score is better
-    if (
-      newScore.score > oldScore.score ||
-      (
-        newScore.score === oldScore.score &&
-        newScore.accuracy > oldScore.accuracy
-      )
-    ) {
-      scores[existingIndex] = newScore;
-    }
-  }
-
-  scores.sort(function (first, second) {
-    if (second.score !== first.score) {
-      return second.score - first.score;
-    }
-
-    return second.accuracy - first.accuracy;
-  });
-
-
-  localStorage.setItem(
-    storageKey,
-    JSON.stringify(scores)
-  );
-
-
-  console.log(
-    "Leaderboard score saved:",
-    newScore
-  );
 }
-
 
 // BUTTON CONNECTIONS
 
