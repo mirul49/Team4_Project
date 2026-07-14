@@ -1023,45 +1023,97 @@ function endGame(
 
 // SAVE SCORE
 
-// SAVE SCORE TO DATABASE
-
-async function saveScore(result) {
+function saveScore(result) {
   const username = getLoggedInUser();
 
-  // Guest scores are not saved.
+  // Do not save guest scores
   if (!username) {
     return;
   }
 
+  const storageKey = "typerush-leaderboard";
+  const currentDuration = Number(result.duration);
+
+  // Only accept 20-second or 30-second games
+  if (currentDuration !== 20 && currentDuration !== 30) {
+    return;
+  }
+
+  let scores = [];
+
   try {
-    const response = await fetch("/api/leaderboard", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        username: username,
-        score: result.score,
-        timeMode: result.duration
-      })
-    });
+    const savedScores = localStorage.getItem(storageKey);
 
-    const data = await response.json();
+    scores = savedScores
+      ? JSON.parse(savedScores)
+      : [];
 
-    if (!response.ok) {
-      throw new Error(
-        data.message ||
-        "Unable to save leaderboard score."
-      );
+    if (!Array.isArray(scores)) {
+      scores = [];
     }
   } catch (error) {
-    message.textContent =
-      "Score could not be saved: " +
-      error.message;
-
-    message.className =
-      "game-message incorrect-message";
+    scores = [];
   }
+
+  /*
+    Remove accidental duplicate results that were previously
+    saved under both 20s and 30s.
+  */
+  scores = scores.filter(function (entry) {
+    const isWrongDuplicate =
+      entry.username === username &&
+      Number(entry.score) === Number(result.score) &&
+      Number(entry.accuracy) === Number(result.accuracy) &&
+      Number(entry.timeLimit) !== currentDuration;
+
+    return !isWrongDuplicate;
+  });
+
+  const newScore = {
+    username: username,
+    score: Number(result.score),
+    accuracy: Number(result.accuracy),
+    timeLimit: currentDuration,
+    difficulty: result.difficulty,
+    wpm: Number(result.wpm)
+  };
+
+  const existingIndex = scores.findIndex(function (entry) {
+    return (
+      entry.username === username &&
+      Number(entry.timeLimit) === currentDuration
+    );
+  });
+
+  if (existingIndex === -1) {
+    scores.push(newScore);
+  } else {
+    const existingScore = scores[existingIndex];
+
+    const isBetterScore =
+      newScore.score > Number(existingScore.score);
+
+    const isBetterAccuracy =
+      newScore.score === Number(existingScore.score) &&
+      newScore.accuracy > Number(existingScore.accuracy);
+
+    if (isBetterScore || isBetterAccuracy) {
+      scores[existingIndex] = newScore;
+    }
+  }
+
+  scores.sort(function (first, second) {
+    if (second.score !== first.score) {
+      return second.score - first.score;
+    }
+
+    return second.accuracy - first.accuracy;
+  });
+
+  localStorage.setItem(
+    storageKey,
+    JSON.stringify(scores)
+  );
 }
 
 // BUTTON CONNECTIONS
